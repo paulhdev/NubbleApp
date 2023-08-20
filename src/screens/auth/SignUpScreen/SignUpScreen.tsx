@@ -6,13 +6,17 @@ import { Button } from '../../../components/Button/Button';
 import { PasswordInput } from '../../../components/PasswordInput/PasswordInput';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../routes/Routes';
+import { useResetNavigationSuccess } from '../../../hooks/useResetNavigationSuccess';
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>
 
 export function SignUpScreen({ navigation }: ScreenProps) {
 
+  const { reset } = useResetNavigationSuccess();
+
   function submitForm() {
-    navigation.navigate('SuccessScreen', {
+
+    reset({
       title: 'Sua conta foi criada com sucesso!',
       description: 'Agora é só fazer login na nossa plataforma',
       icon: {
@@ -20,6 +24,15 @@ export function SignUpScreen({ navigation }: ScreenProps) {
         color: 'success',
       },
     });
+
+    // navigation.navigate('SuccessScreen', {
+    //   title: 'Sua conta foi criada com sucesso!',
+    //   description: 'Agora é só fazer login na nossa plataforma',
+    //   icon: {
+    //     name: 'checkRound',
+    //     color: 'success',
+    //   },
+    // });
   }
 
   return (
