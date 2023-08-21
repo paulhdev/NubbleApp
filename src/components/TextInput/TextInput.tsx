@@ -1,8 +1,15 @@
-import React, { useRef } from 'react';
-import { Pressable, TextInput as RNTextInput, TextInputProps as RNTextInputProps, TextStyle } from 'react-native';
-import { Box, BoxProps } from '../Box/Box';
-import { $fontFamily, $fontSizes, Text } from '../Text/Text';
-import { useAppTheme } from '../../hooks/useAppTheme';
+import React, {useRef} from 'react';
+import {
+  Pressable,
+  TextInput as RNTextInput,
+  TextInputProps as RNTextInputProps,
+  TextStyle,
+} from 'react-native';
+
+import {useAppTheme} from '@hooks';
+
+import {Box, BoxProps} from '../Box/Box';
+import {$fontFamily, $fontSizes, Text} from '../Text/Text';
 
 export interface TextInputProps extends RNTextInputProps {
   label: string;
@@ -11,9 +18,14 @@ export interface TextInputProps extends RNTextInputProps {
   boxProps?: BoxProps;
 }
 
-export function TextInput({ label, errorMessage, RightComponent, boxProps, ...rnTextInputProps }: TextInputProps) {
-
-  const { colors } = useAppTheme();
+export function TextInput({
+  label,
+  errorMessage,
+  RightComponent,
+  boxProps,
+  ...rnTextInputProps
+}: TextInputProps) {
+  const {colors} = useAppTheme();
 
   const inputRef = useRef<RNTextInput>(null);
 
@@ -33,7 +45,9 @@ export function TextInput({ label, errorMessage, RightComponent, boxProps, ...rn
     <Box {...boxProps}>
       <Pressable onPress={focusInput}>
         <Box>
-          <Text mb="s4" preset="paragraphMedium">{label}</Text>
+          <Text mb="s4" preset="paragraphMedium">
+            {label}
+          </Text>
           <Box {...$textInputContainer}>
             <RNTextInput
               ref={inputRef}
@@ -41,15 +55,17 @@ export function TextInput({ label, errorMessage, RightComponent, boxProps, ...rn
               style={$textInputStyle}
               {...rnTextInputProps}
             />
-            {
-              RightComponent &&
-              <Box ml="s16" justifyContent="center">{RightComponent}</Box>
-            }
+            {RightComponent && (
+              <Box ml="s16" justifyContent="center">
+                {RightComponent}
+              </Box>
+            )}
           </Box>
-          {
-            errorMessage &&
-            <Text preset="paragraphSmall" bold color="error">{errorMessage}</Text>
-          }
+          {errorMessage && (
+            <Text preset="paragraphSmall" bold color="error">
+              {errorMessage}
+            </Text>
+          )}
         </Box>
       </Pressable>
     </Box>
